@@ -3,6 +3,7 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
+
 trigger:
 - master
 
@@ -23,4 +24,9 @@ steps:
     SonarQube: 'localSonarQ'
     scannerMode: 'CLI'
     configMode: 'file'
+- task: SonarQubeAnalyze@4
+- task: SonarQubePublish@4
+  inputs:
+    pollingTimeoutSec: '300'
+
 
