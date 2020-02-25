@@ -18,15 +18,32 @@ steps:
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
-  
-- task: SonarQubePrepare@4
+- task: InstallFortifySCA@5
   inputs:
-    SonarQube: 'localSonarQ'
-    scannerMode: 'CLI'
-    configMode: 'file'
-- task: SonarQubeAnalyze@4
-- task: SonarQubePublish@4
+    InstallerPath: '/'
+    VS2013: false
+    VS2015: false
+    LicenseFile: '/'
+    RunFortifyRulepackUpdate: true
+- task: FortifySCA@5
   inputs:
-    pollingTimeoutSec: '300'
+    runBuildTranslate: true
+    applicationType: 'java'
+    fortifyBuildId: '1.8'
+    runFortifyRulepackUpdate: true
+    runFortifyClean: true
+    scaVerbose: true
+    scaDebug: true
+    runFortifyScan: true
+    fortifyScanType: 'LocalScan'
+# - task: SonarQubePrepare@4
+#   inputs:
+#     SonarQube: 'localSonarQ'
+#     scannerMode: 'CLI'
+#     configMode: 'file'
+# - task: SonarQubeAnalyze@4
+# - task: SonarQubePublish@4
+#   inputs:
+#     pollingTimeoutSec: '300'
 
 
